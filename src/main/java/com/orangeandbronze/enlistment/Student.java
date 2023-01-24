@@ -3,7 +3,6 @@ package com.orangeandbronze.enlistment;
 import java.util.*;
 
 class Student {
-
     private final int studentNumber;
     private final Collection<Section> sections = new HashSet<>();
 
