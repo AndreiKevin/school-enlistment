@@ -24,9 +24,10 @@ class Student {
     }
 
 
-    void enlist(Section section) {
-        notNull(section);
-        sections.add(section);
+    void enlist(Section newSection) {
+        notNull(newSection);
+        sections.forEach( currSection -> currSection.checkForConflict(newSection));
+        sections.add(newSection);
     }
 
     Collection<Section> getSections() {

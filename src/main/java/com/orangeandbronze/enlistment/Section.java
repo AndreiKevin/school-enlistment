@@ -6,11 +6,25 @@ import static org.apache.commons.lang3.Validate.*;
 
 class Section {
     private String sectionId;
+    private Schedule schedule;
 
-    Section(String sectionId) {
+    Section(String sectionId, Schedule schedule) {
         notBlank(sectionId);
         isTrue(isAlphanumeric(sectionId), "sectionId must be alphanumeric, was " + sectionId);
         this.sectionId = sectionId;
+        this.schedule = schedule;
+    }
+
+    boolean hasConflict(Section other) {
+        return this.schedule.equals(other.schedule);
+    }
+
+    void checkForConflict(Section other) {
+        if(this.schedule.equals(other.schedule)) {
+            throw new ScheduleConflictException("current section " + this +
+                    " has same schedule as new section " + other +
+                    " at schedule " + this.schedule);
+        }
     }
 
     @Override
@@ -33,4 +47,6 @@ class Section {
         return Objects.hash(sectionId);
     }
 }
+
+
 

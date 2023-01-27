@@ -13,8 +13,8 @@ public class StudentTest {
     void enlist_2_sections_no_conflict() {
         // Given 1 student and 2 sections with no conflict
         Student student = new Student(1, Collections.emptyList());
-        Section sec1 = new Section("A");
-        Section sec2 = new Section("B");
+        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000));
+        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430));
 
         // When the student enlists in both sections
         student.enlist(sec1);
@@ -31,8 +31,16 @@ public class StudentTest {
 
     @Test
     void enlist_2_sections_same_schedule() {
+        // Given 1 student and 2 sections w/ same schedule
+        Student student = new Student(1, Collections.emptyList());
+        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000));
+        Section sec2 = new Section("B", new Schedule(Days.MTH, Period.H1000));
 
+        // When student enlist in both sections
+        student.enlist(sec1);
 
+        // Then at 2nd section an exception should be thrown
+        assertThrows(ScheduleConflictException.class, () -> student.enlist(sec2));
     }
 }
 
