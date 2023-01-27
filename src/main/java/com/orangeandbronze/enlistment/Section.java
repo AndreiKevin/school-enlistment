@@ -5,14 +5,17 @@ import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.commons.lang3.Validate.*;
 
 class Section {
-    private String sectionId;
-    private Schedule schedule;
+    private final String sectionId;
+    private final Schedule schedule;
 
-    Section(String sectionId, Schedule schedule) {
+    private final Room room;
+
+    Section(String sectionId, Schedule schedule, Room room) {
         notBlank(sectionId);
         isTrue(isAlphanumeric(sectionId), "sectionId must be alphanumeric, was " + sectionId);
         this.sectionId = sectionId;
         this.schedule = schedule;
+        this.room = room;
     }
 
     boolean hasConflict(Section other) {

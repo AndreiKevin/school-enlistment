@@ -11,8 +11,7 @@ class Student {
     Student(int studentNumber, Collection<Section> sections) {
         if(studentNumber < 0) {
             throw new IllegalArgumentException(
-                    "studentNumber should be non-negative, was: "
-                            + studentNumber);
+                    "studentNumber should be non-negative, was: "  + studentNumber);
         }
         if (sections == null) {
             throw new NullPointerException("sections should not be null");
