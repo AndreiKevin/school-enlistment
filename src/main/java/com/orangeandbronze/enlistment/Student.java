@@ -1,6 +1,8 @@
 package com.orangeandbronze.enlistment;
 
 import java.util.*;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.Validate.*;
 
 class Student {
     private final int studentNumber;
@@ -23,10 +25,12 @@ class Student {
 
 
     void enlist(Section section) {
-        if (section == null) {
-            throw new NullPointerException();
-        }
+        notNull(section);
         sections.add(section);
+    }
+
+    Collection<Section> getSections() {
+        return new ArrayList<>(sections);
     }
 
     @Override
