@@ -23,6 +23,10 @@ class Student {
         this.sections.removeIf(Objects::isNull);
     }
 
+    Student(int studentNumber) {
+        this(studentNumber, Collections.emptyList());
+    }
+
 
     void enlist(Section newSection) {
         notNull(newSection);

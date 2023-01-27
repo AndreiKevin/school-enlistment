@@ -3,16 +3,17 @@ package com.orangeandbronze.enlistment;
 import org.junit.jupiter.api.*;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentTest {
+
+    static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, Period.H1430);
     @Test
     void enlist_2_sections_no_conflict() {
         // Given 1 student and 2 sections with no conflict
-        Student student = new Student(1, Collections.emptyList());
+        Student student = new Student(1);
         Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000));
         Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430));
 
@@ -32,9 +33,9 @@ public class StudentTest {
     @Test
     void enlist_2_sections_same_schedule() {
         // Given 1 student and 2 sections w/ same schedule
-        Student student = new Student(1, Collections.emptyList());
-        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000));
-        Section sec2 = new Section("B", new Schedule(Days.MTH, Period.H1000));
+        Student student = new Student(1);
+        Section sec1 = new Section("A", DEFAULT_SCHEDULE);
+        Section sec2 = new Section("B", DEFAULT_SCHEDULE);
 
         // When student enlist in both sections
         student.enlist(sec1);
