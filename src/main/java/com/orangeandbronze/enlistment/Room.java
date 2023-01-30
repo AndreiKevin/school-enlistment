@@ -21,7 +21,7 @@ public class Room {
         this.capacity = capacity;
     }
 
-    public boolean isNotFullyOccupied(){
+    public boolean isNotFull(){
         return currentStudentOccupied < capacity;
     }
 

@@ -30,6 +30,14 @@ class Section {
         }
     }
 
+    void checkIfFull(){ if(!this.room.isNotFull()) {
+        throw new SectionCapacityException("current section " + this +
+                " is fully occupied " );
+        }
+    }
+
+    void addStudent(){ room.addStudent(); }
+
     @Override
     public String toString() {
         return sectionId;
