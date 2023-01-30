@@ -30,8 +30,9 @@ class Section {
         }
     }
 
-    void checkIfFull(){ if(!this.room.isNotFull()) {
-        throw new SectionCapacityException("current section " + this +
+    void checkIfFull(){
+        if(!this.room.isNotFull()) {
+            throw new SectionCapacityException("current section " + this +
                 " is fully occupied " );
         }
     }
