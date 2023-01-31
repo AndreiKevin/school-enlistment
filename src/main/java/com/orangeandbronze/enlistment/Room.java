@@ -15,7 +15,7 @@ public class Room {
         isTrue(isAlphanumeric(roomName), "roomName must be alphanumeric, was " + roomName);
 
         if (capacity <= 0 ) {
-            throw new IllegalArgumentException("Room Capacity cannot be non-negative was: " + capacity);
+            throw new IllegalArgumentException("Room Capacity cannot be non-positive was: " + capacity);
         }
         this.roomName = roomName;
         this.capacity = capacity;
