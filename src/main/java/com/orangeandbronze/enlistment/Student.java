@@ -1,7 +1,7 @@
 package com.orangeandbronze.enlistment;
 
 import java.util.*;
-import static org.apache.commons.lang3.StringUtils.*;
+
 import static org.apache.commons.lang3.Validate.*;
 
 class Student {
@@ -33,6 +33,16 @@ class Student {
         newSection.checkIfFull();
         sections.add(newSection);
         newSection.addStudent();
+    }
+
+    public void cancelEnrollment(Section section){
+        notNull(section);
+        if(!sections.contains(section)) {
+            throw new CancelNotEnlistedSectionException(this.toString(), section.toString());
+        }
+
+        sections.remove(section);
+        section.removeStudent();
     }
 
     public Collection<Section> getSections() {

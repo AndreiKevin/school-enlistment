@@ -31,8 +31,7 @@ public class Room {
 
     public void removeStudent(){
         if (currentStudentOccupied == 0){
-            // TODO: Make an exception class for this.
-            throw new RuntimeException("Current Students are 0. Cannot remove any more students.");
+            throw new RemovingFromEmptyRoomException(this.toString());
         }
         --currentStudentOccupied;
     }

@@ -39,6 +39,10 @@ class Section {
 
     public void addStudent(){ room.addStudent(); }
 
+    public void removeStudent(){
+        room.removeStudent();
+    }
+
     @Override
     public String toString() {
         return sectionId;
