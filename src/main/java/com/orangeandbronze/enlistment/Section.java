@@ -22,7 +22,7 @@ class Section {
         return this.schedule.equals(other.schedule);
     }
 
-    void checkForConflict(Section other) {
+    public void checkForConflict(Section other) {
         if(this.schedule.equals(other.schedule)) {
             throw new ScheduleConflictException("current section " + this +
                     " has same schedule as new section " + other +
@@ -30,14 +30,14 @@ class Section {
         }
     }
 
-    void checkIfFull(){
+    public void checkIfFull(){
         if(!this.room.isNotFull()) {
             throw new SectionCapacityException("current section " + this +
                 " is fully occupied " );
         }
     }
 
-    void addStudent(){ room.addStudent(); }
+    public void addStudent(){ room.addStudent(); }
 
     @Override
     public String toString() {

@@ -27,7 +27,7 @@ class Student {
     }
 
 
-    void enlist(Section newSection) {
+    public void enlist(Section newSection) {
         notNull(newSection);
         sections.forEach( currSection -> currSection.checkForConflict(newSection));
         newSection.checkIfFull();
@@ -35,7 +35,7 @@ class Student {
         newSection.addStudent();
     }
 
-    Collection<Section> getSections() {
+    public Collection<Section> getSections() {
         return new ArrayList<>(sections);
     }
 
