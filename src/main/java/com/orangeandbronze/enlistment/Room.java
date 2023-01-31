@@ -21,19 +21,26 @@ public class Room {
         this.capacity = capacity;
     }
 
-    public boolean isNotFull(){
-        return currentStudentOccupied < capacity;
-    }
-
     public void addStudent(){
+        checkIsFull();
         ++currentStudentOccupied;
     }
 
     public void removeStudent(){
-        if (currentStudentOccupied == 0){
+        checkIsNotEmpty();
+        --currentStudentOccupied;
+    }
+
+    private void checkIsFull(){
+        if (currentStudentOccupied >= capacity) {
+            throw new RooomCapacityException("current section " + this +
+                    " is fully occupied ");
+        }
+    }
+    private void checkIsNotEmpty() {
+        if (currentStudentOccupied == 0) {
             throw new RemovingFromEmptyRoomException(this.toString());
         }
-        --currentStudentOccupied;
     }
 
     @Override

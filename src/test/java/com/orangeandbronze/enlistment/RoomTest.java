@@ -2,9 +2,6 @@ package com.orangeandbronze.enlistment;
 
 import org.junit.jupiter.api.*;
 
-import java.util.Collection;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RoomTest
@@ -22,7 +19,7 @@ public class RoomTest
         student1.enlist(sec);
 
         //Then an exception should be thrown when student 2 enlists
-        assertThrows(SectionCapacityException.class, () -> student2.enlist(sec));
+        assertThrows(RooomCapacityException.class, () -> student2.enlist(sec));
     }
 
     @Test

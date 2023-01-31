@@ -18,29 +18,25 @@ class Section {
         this.room = room;
     }
 
-    boolean hasConflict(Section other) {
-        return this.schedule.equals(other.schedule);
-    }
-
     public void checkForConflict(Section other) {
-        if(this.schedule.equals(other.schedule)) {
+        if(hasConflict(other)) {
             throw new ScheduleConflictException("current section " + this +
                     " has same schedule as new section " + other +
                     " at schedule " + this.schedule);
         }
     }
 
-    public void checkIfFull(){
-        if(!this.room.isNotFull()) {
-            throw new SectionCapacityException("current section " + this +
-                " is fully occupied " );
-        }
+    public void addStudent(){
+        room.addStudent();
     }
-
-    public void addStudent(){ room.addStudent(); }
 
     public void removeStudent(){
         room.removeStudent();
+    }
+
+
+    private boolean hasConflict(Section other) {
+        return this.schedule.equals(other.schedule);
     }
 
     @Override
