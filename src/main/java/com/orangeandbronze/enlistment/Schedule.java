@@ -9,10 +9,9 @@ public class Schedule {
     private final Period period;
 
     public Schedule(Days days, Period period) {
-        // Validation for days
         notNull(days);
         notNull(period);
-        // Validation for startTime
+
         this.days = days;
         this.period = period;
     }

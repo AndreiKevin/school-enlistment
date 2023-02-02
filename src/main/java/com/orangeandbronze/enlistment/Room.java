@@ -5,7 +5,7 @@ import static org.apache.commons.lang3.Validate.*;
 
 import java.util.*;
 
-public class Room {
+class Room {
     private final String roomName;
     private final int capacity;
     private int currentStudentOccupied = 0;
@@ -33,13 +33,14 @@ public class Room {
 
     private void checkIsFull(){
         if (currentStudentOccupied >= capacity) {
-            throw new RooomCapacityException("current section " + this +
+            throw new RoomCapacityException("current section " + this +
                     " is fully occupied ");
         }
     }
     private void checkIsNotEmpty() {
         if (currentStudentOccupied == 0) {
-            throw new RemovingFromEmptyRoomException(this.toString());
+            throw new RemovingFromEmptyRoomException("Current student count is 0. Cannot remove any more students in room "
+                    + this.toString());
         }
     }
 

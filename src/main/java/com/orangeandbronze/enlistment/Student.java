@@ -37,7 +37,8 @@ class Student {
     public void cancelEnrollment(Section section){
         notNull(section);
         if(!sections.contains(section)) {
-            throw new CancelNotEnlistedSectionException(this.toString(), section.toString());
+            throw new CancelNotEnlistedSectionException("Cannot cancel enlistment because student is not enlisted in section. student was "
+                    + this.toString() + ", section was " + section.toString());
         }
 
         sections.remove(section);

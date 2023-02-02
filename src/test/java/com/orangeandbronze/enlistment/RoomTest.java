@@ -19,7 +19,7 @@ public class RoomTest
         student1.enlist(sec);
 
         //Then an exception should be thrown when student 2 enlists
-        assertThrows(RooomCapacityException.class, () -> student2.enlist(sec));
+        assertThrows(RoomCapacityException.class, () -> student2.enlist(sec));
     }
 
     @Test

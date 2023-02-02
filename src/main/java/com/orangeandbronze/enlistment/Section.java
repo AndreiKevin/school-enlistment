@@ -7,12 +7,14 @@ import static org.apache.commons.lang3.Validate.*;
 class Section {
     private final String sectionId;
     private final Schedule schedule;
-
     private final Room room;
 
     Section(String sectionId, Schedule schedule, Room room) {
         notBlank(sectionId);
         isTrue(isAlphanumeric(sectionId), "sectionId must be alphanumeric, was " + sectionId);
+
+        // TODO: Add Not null check here.
+
         this.sectionId = sectionId;
         this.schedule = schedule;
         this.room = room;
