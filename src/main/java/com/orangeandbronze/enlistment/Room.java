@@ -40,7 +40,7 @@ class Room {
     private void checkIsNotEmpty() {
         if (currentStudentOccupied == 0) {
             throw new RemovingFromEmptyRoomException("Current student count is 0. Cannot remove any more students in room "
-                    + this.toString());
+                    + this);
         }
     }
 
