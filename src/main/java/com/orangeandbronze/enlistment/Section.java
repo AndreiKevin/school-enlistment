@@ -13,7 +13,8 @@ class Section {
         notBlank(sectionId);
         isTrue(isAlphanumeric(sectionId), "sectionId must be alphanumeric, was " + sectionId);
 
-        // TODO: Add Not null check here.
+        notNull(schedule);
+        notNull(room);
 
         this.sectionId = sectionId;
         this.schedule = schedule;
