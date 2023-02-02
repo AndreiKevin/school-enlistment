@@ -38,7 +38,7 @@ public class RoomTest
     }
 
     @Test
-    void cancel_enrollment_does_not_belong_to_class(){
+    void cancel_does_not_belong_to_class(){
         //Given a student and 2 sections
         Student student = new Student(1);
         Room room1 = new Room("AGH20", 10);
@@ -51,12 +51,12 @@ public class RoomTest
         student.enlist(section1);
 
         //Then throw an exception when student enrolls in section 2 since they are not enrolled there
-        assertThrows(CancelNotEnlistedSectionException.class, () -> student.cancelEnrollment((section2)));
+        assertThrows(CancelNotEnlistedSectionException.class, () -> student.cancel((section2)));
     }
 
 
     @Test
-    void cancel_enrollment_belongs_to_class(){
+    void cancel_belongs_to_class(){
         //Given a student and a section
         Student student = new Student(1);
         Room room = new Room("AGH20", 10);
@@ -66,7 +66,7 @@ public class RoomTest
         student.enlist(section);
 
         //And student cancels enlistment
-        student.cancelEnrollment(section);
+        student.cancel(section);
 
         //They should not be a part of any section
         assertEquals(0, student.getSections().size());
