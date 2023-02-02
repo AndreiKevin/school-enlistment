@@ -71,4 +71,22 @@ public class RoomTest
         //They should not be a part of any section
         assertEquals(0, student.getSections().size());
     }
+
+    @Test
+    void cancel_enlisment_should_decrement() {
+        //Given a student, a room, and a section
+        Student student1 = new Student(1);
+        Room room = new Room("AGH20", 1);
+        Section section = new Section("A", DEFAULT_SCHEDULE, room);
+
+        //When student cancels enlistment to a section
+        student1.enlist(section);
+        student1.cancel(section);
+
+        //Then remove from student's section list and decrement capacity
+        assertAll(
+                () -> assertFalse(student1.getSections().contains(section)),
+                () -> assertEquals(0, room.currentCapacity())
+        );
+    }
 }

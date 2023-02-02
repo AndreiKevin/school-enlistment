@@ -21,6 +21,10 @@ class Room {
         this.capacity = capacity;
     }
 
+    public int currentCapacity() {
+        return currentStudentOccupied;
+    }
+
     public void addStudent(){
         checkIsFull();
         ++currentStudentOccupied;
