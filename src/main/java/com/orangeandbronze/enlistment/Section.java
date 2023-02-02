@@ -54,7 +54,7 @@ class Section {
 
         Section section = (Section) o;
 
-        return this.sectionId == section.sectionId;
+        return this.sectionId.equals(section.sectionId);
     }
 
     @Override
