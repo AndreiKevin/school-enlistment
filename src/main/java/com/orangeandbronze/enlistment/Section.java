@@ -37,7 +37,7 @@ class Section {
     }
 
 
-    int currentCapacity() {
+    int getCurrentStudentOccupied() {
         return currentStudentOccupied;
     }
 
