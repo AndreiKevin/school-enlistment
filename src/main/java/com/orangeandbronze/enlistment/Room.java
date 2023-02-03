@@ -7,8 +7,7 @@ import java.util.*;
 
 class Room {
     private final String roomName;
-    private final int capacity;
-    private int currentStudentOccupied = 0;
+    protected final int capacity;
 
     Room(String roomName, int capacity){
         notBlank(roomName);
@@ -21,32 +20,6 @@ class Room {
         this.capacity = capacity;
     }
 
-    int currentCapacity() {
-        return currentStudentOccupied;
-    }
-
-    void addStudent(){
-        checkIsFull();
-        ++currentStudentOccupied;
-    }
-
-    void removeStudent(){
-        checkIsNotEmpty();
-        --currentStudentOccupied;
-    }
-
-    private void checkIsFull(){
-        if (currentStudentOccupied >= capacity) {
-            throw new RoomCapacityException("current section " + this +
-                    " is fully occupied ");
-        }
-    }
-    private void checkIsNotEmpty() {
-        if (currentStudentOccupied == 0) {
-            throw new RemovingFromEmptyRoomException("Current student count is 0. Cannot remove any more students in room "
-                    + this);
-        }
-    }
 
     @Override
     public String toString() {

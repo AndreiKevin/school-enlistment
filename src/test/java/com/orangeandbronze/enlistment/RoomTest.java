@@ -86,7 +86,7 @@ public class RoomTest
         //Then remove from student's section list and decrement capacity
         assertAll(
                 () -> assertFalse(student1.getSections().contains(section)),
-                () -> assertEquals(0, room.currentCapacity())
+                () -> assertEquals(0, section.currentCapacity())
         );
     }
 }
