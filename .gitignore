@@ -40,3 +40,4 @@ gradle-app.setting
 *.lock
 *.probe
 *.xml
+.idea/.name
