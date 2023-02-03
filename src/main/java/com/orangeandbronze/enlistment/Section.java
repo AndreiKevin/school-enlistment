@@ -21,7 +21,7 @@ class Section {
         this.room = room;
     }
 
-    public void checkForConflict(Section other) {
+    void checkForConflict(Section other) {
         if(hasConflict(other)) {
             throw new ScheduleConflictException("current section " + this +
                     " has same schedule as new section " + other +
@@ -29,11 +29,11 @@ class Section {
         }
     }
 
-    public void addStudent(){
+    void addStudent(){
         room.addStudent();
     }
 
-    public void removeStudent(){
+    void removeStudent(){
         room.removeStudent();
     }
 

@@ -27,14 +27,14 @@ class Student {
     }
 
 
-    public void enlist(Section newSection) {
+    void enlist(Section newSection) {
         notNull(newSection);
         sections.forEach( currSection -> currSection.checkForConflict(newSection));
         sections.add(newSection);
         newSection.addStudent();
     }
 
-    public void cancel(Section section){
+    void cancel(Section section){
         notNull(section);
         if(!sections.contains(section)) {
             throw new CancelNotEnlistedSectionException("Cannot cancel enlistment because student is not enlisted in section. student was "
