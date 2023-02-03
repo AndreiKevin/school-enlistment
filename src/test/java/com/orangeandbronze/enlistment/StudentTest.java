@@ -113,7 +113,7 @@ public class StudentTest {
     }
 
     @Test
-    void cancel_enlisment_should_decrement() {
+    void cancel_enlistment_should_decrement() {
         //Given a student, a room, and a section
         Student student1 = new Student(1);
         Room room = new Room("AGH20", 1);
