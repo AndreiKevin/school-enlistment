@@ -2,6 +2,7 @@ package com.orangeandbronze.enlistment;
 
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,5 +47,23 @@ public class StudentTest {
         // Then at 2nd section an exception should be thrown
         assertThrows(ScheduleConflictException.class, () -> student.enlist(sec2));
     }
+
+    @Test
+    void enlist_same_subject_throws_error() {
+        // Given 1 student enrolled in section A with a Math subject and section B with Math subject
+        Student student = new Student(1,
+                        new ArrayList<Section>(new Section("A", new Schedule(Days.TF, Period.H1430),
+                        new Room("BestRoomEver", 40), new Subject("Math"))));
+        Section sameSubjectSection = new Section("B", DEFAULT_SCHEDULE, new Room("DifferentRoom",
+                          20, new Subject("Math")));
+
+        // When student tries to enlist to B
+
+        // Then throw an exception
+        assertThrows(SameSubjectException.class, () -> student.enlist(sameSubjectSection));
+    }
+   
+    }
+
 }
 
