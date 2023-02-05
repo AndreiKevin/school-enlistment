@@ -20,6 +20,8 @@ class Student {
         this.studentNumber = studentNumber;
         this.sections.addAll(sections);
         this.sections.removeIf(Objects::isNull);
+
+        this.sections.forEach( currSection -> currSection.addStudent());
     }
 
     Student(int studentNumber) {
