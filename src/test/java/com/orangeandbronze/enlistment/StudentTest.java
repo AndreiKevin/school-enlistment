@@ -2,6 +2,8 @@ package com.orangeandbronze.enlistment;
 
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -79,16 +81,16 @@ public class StudentTest {
 
     @Test
     void cancel_does_not_belong_to_class(){
-        //Given a student and 2 sections
-        Student student = new Student(1);
+        //Given 2 sections and a student enlisted in one of the sections
         Room room1 = new Room("AGH20", 10);
         Room room2 = new Room("AGH35", 10);
 
         Section section1 = new Section("A", DEFAULT_SCHEDULE, room1);
         Section section2 = new Section("B", DEFAULT_SCHEDULE, room2);
 
-        //When student 1 enlists in section 1
-        student.enlist(section1);
+        Student student = new Student(1, Arrays.asList(section1));
+
+        //When student 1 is enlisted in section 1, but tries to cancel from section 2.
 
         //Then throw an exception when student enrolls in section 2 since they are not enrolled there
         assertThrows(CancelNotEnlistedSectionException.class, () -> student.cancel((section2)));
@@ -97,15 +99,13 @@ public class StudentTest {
 
     @Test
     void cancel_belongs_to_class(){
-        //Given a student and a section
-        Student student = new Student(1);
+        //Given a section and a student
         Room room = new Room("AGH20", 10);
         Section section = new Section("S12", DEFAULT_SCHEDULE, room);
 
-        //When student enlists in section
-        student.enlist(section);
+        Student student = new Student(1, Arrays.asList(section));
 
-        //And student cancels enlistment
+        //When student cancels enlistment
         student.cancel(section);
 
         //They should not be a part of any section
@@ -114,13 +114,12 @@ public class StudentTest {
 
     @Test
     void cancel_enlistment_should_decrement() {
-        //Given a student, a room, and a section
-        Student student1 = new Student(1);
+        //Given a room, a section and a student
         Room room = new Room("AGH20", 1);
         Section section = new Section("A", DEFAULT_SCHEDULE, room);
 
         //When student cancels enlistment to a section
-        student1.enlist(section);
+        Student student1 = new Student(1, Arrays.asList(section));
         student1.cancel(section);
 
         //Then remove from student's section list and decrement capacity
