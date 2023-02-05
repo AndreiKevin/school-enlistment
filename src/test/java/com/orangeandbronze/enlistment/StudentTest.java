@@ -12,13 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StudentTest {
 
     static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, Period.H1430);
+    static final Subject DEFAULT_SUBJECT_A = new Subject("A", 1);
+    static final Subject DEFAULT_SUBJECT_B = new Subject("B", 1);
     @Test
     void enlist_2_sections_no_conflict() {
         // Given 1 student and 2 sections with no conflict
         Student student = new Student(1);
         Room room = new Room("AGH20", 45);
-        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room);
-        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), room);
+        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), room, DEFAULT_SUBJECT_B);
 
         // When the student enlists in both sections
         student.enlist(sec1);
@@ -39,8 +41,8 @@ public class StudentTest {
         Student student = new Student(1);
         Room room1 = new Room("AGH20", 45);
         Room room2 = new Room("HSS30", 45);
-        Section sec1 = new Section("A", DEFAULT_SCHEDULE, room1);
-        Section sec2 = new Section("B", DEFAULT_SCHEDULE, room2);
+        Section sec1 = new Section("A", DEFAULT_SCHEDULE, room1, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", DEFAULT_SCHEDULE, room2, DEFAULT_SUBJECT_B);
 
         // When student enlist in both sections
         student.enlist(sec1);
@@ -55,7 +57,7 @@ public class StudentTest {
         Student student1 = new Student(1);
         Student student2 = new Student(2);
         Room room = new Room("AGH20", 1);
-        Section sec = new Section("A", DEFAULT_SCHEDULE, room);
+        Section sec = new Section("A", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
         //When student 1 enlists
         student1.enlist(sec);
@@ -70,7 +72,7 @@ public class StudentTest {
         Student student1 = new Student(1);
         Student student2 = new Student(2);
         Room room = new Room("AGH20", 2);
-        Section sec = new Section("A", DEFAULT_SCHEDULE, room);
+        Section sec = new Section("A", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
         //When student 1 enlists
         student1.enlist(sec);
@@ -85,8 +87,8 @@ public class StudentTest {
         Room room1 = new Room("AGH20", 10);
         Room room2 = new Room("AGH35", 10);
 
-        Section section1 = new Section("A", DEFAULT_SCHEDULE, room1);
-        Section section2 = new Section("B", DEFAULT_SCHEDULE, room2);
+        Section section1 = new Section("A", DEFAULT_SCHEDULE, room1, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", DEFAULT_SCHEDULE, room2, DEFAULT_SUBJECT_A);
 
         Student student = new Student(1, Arrays.asList(section1));
 
@@ -101,7 +103,7 @@ public class StudentTest {
     void cancel_belongs_to_class(){
         //Given a section and a student
         Room room = new Room("AGH20", 10);
-        Section section = new Section("S12", DEFAULT_SCHEDULE, room);
+        Section section = new Section("S12", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
         Student student = new Student(1, Arrays.asList(section));
 
@@ -116,7 +118,7 @@ public class StudentTest {
     void cancel_enlistment_should_decrement() {
         //Given a room, a section and a student
         Room room = new Room("AGH20", 1);
-        Section section = new Section("A", DEFAULT_SCHEDULE, room);
+        Section section = new Section("A", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
         //When student cancels enlistment to a section
         Student student1 = new Student(1, Arrays.asList(section));
