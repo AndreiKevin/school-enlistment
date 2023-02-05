@@ -1,14 +1,18 @@
 package com.orangeandbronze.enlistment;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.commons.lang3.Validate.*;
 
 class Subject {
     private final String subjectId;
+    private final Collection<Subject> prerequisites = new HashSet<>();
     private final int units;
 
-    public Subject(String subjectId, int units){
+    public Subject(String subjectId, int units, Collection<Subject> prerequisites){
         notBlank(subjectId);
         isTrue(isAlphanumeric(subjectId), "subjectId must be alphanumeric, was " + subjectId);
 
@@ -16,8 +20,17 @@ class Subject {
             throw new IllegalArgumentException("Units cannot be non-positive was: " + units);
         }
 
+        if (prerequisites == null) {
+            throw new NullPointerException("prerequisites should not be null");
+        }
+
         this.subjectId = subjectId;
         this.units = units;
+        this.prerequisites.addAll(prerequisites);
+    }
+
+    public Subject(String subjectId, int units){
+        this(subjectId, units, Collections.emptyList());
     }
 
     @Override
