@@ -62,7 +62,16 @@ public class StudentTest {
         // Then throw an exception
         assertThrows(SameSubjectException.class, () -> student.enlist(sameSubjectSection));
     }
-   
+
+    @Test
+    void enlist_subject_without_accomplished_prereq_throws_error() {
+        // Given a student and a section A with a prerequisite subject required
+        Student student = new Student(1);
+        Section section = new Section("A", DEFAULT_SCHEDULE, new Room("Z", 10),
+                new Subject("CCPROG2"), new Subject("CCPROG1")); // enroll to (subject) with (prereq)
+        // When student tries to enlist in A
+        // Then an error is thrown
+        assertThrows(IncompletePrerequisiteException.class, () -> student.enlist(section));
     }
 
 }
