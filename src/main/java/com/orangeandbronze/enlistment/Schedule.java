@@ -4,11 +4,11 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public class Schedule {
+class Schedule {
     private final Days days;
     private final Period period;
 
-    public Schedule(Days days, Period period) {
+    Schedule(Days days, Period period) {
         notNull(days);
         notNull(period);
 
