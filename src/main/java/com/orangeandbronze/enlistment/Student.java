@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.Validate.*;
 class Student {
     private final int studentNumber;
     private final Collection<Section> sections = new HashSet<>();
-    private final Collection<Subject> completedSubjects = new HashSet<>();
+    private final Collection<Subject> takenSubjects = new HashSet<>();
 
     Student(int studentNumber, Collection<Section> sections) {
         if(studentNumber < 0) {
@@ -29,10 +29,10 @@ class Student {
         this(studentNumber, Collections.emptyList());
     }
 
-
     void enlist(Section newSection) {
         notNull(newSection);
         sections.forEach( currSection -> currSection.checkForConflict(newSection));
+        newSection.checkIfPrerequisitesTaken(takenSubjects);
 
         sections.add(newSection);
         newSection.addStudent();

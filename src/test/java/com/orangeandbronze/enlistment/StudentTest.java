@@ -159,5 +159,6 @@ public class StudentTest {
         // Then an exception should be thrown
         assertThrows(MissingPrerequisiteException.class, () -> student.enlist(sec));
     }
+
 }
 

@@ -33,6 +33,10 @@ class Subject {
         this(subjectId, units, Collections.emptyList());
     }
 
+    boolean isPrerequisitesTaken(Collection<Subject> takenSubjects) {
+        return takenSubjects.containsAll(prerequisites);
+    }
+
     @Override
     public String toString() {
         return subjectId;
