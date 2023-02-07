@@ -14,6 +14,7 @@ public class StudentTest {
     static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, Period.H1430);
     static final Subject DEFAULT_SUBJECT_A = new Subject("A", 1);
     static final Subject DEFAULT_SUBJECT_B = new Subject("B", 1);
+    static final Subject DEFAULT_SUBJECT_C = new Subject("C", 3, Arrays.asList(DEFAULT_SUBJECT_A));
     @Test
     void enlist_2_sections_no_conflict() {
         // Given 1 student and 2 sections with no conflict
@@ -145,6 +146,18 @@ public class StudentTest {
 
         // Then at 2nd section an exception should be thrown
         assertThrows(SameSubjectException.class, () -> student.enlist(sec2));
+    }
+
+    @Test
+    void enlist_section_with_missing_prerequisite(){
+        // Given 1 student and 1 section w/ prerequisite
+        Student student = new Student(1);
+        Room room = new Room("AGH20", 45);
+        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_C);
+
+        // When student enlist in section with missing prerequisite
+        // Then an exception should be thrown
+        assertThrows(MissingPrerequisiteException.class, () -> student.enlist(sec));
     }
 }
 

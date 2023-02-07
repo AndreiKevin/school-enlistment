@@ -46,6 +46,12 @@ class Section {
                     " with subject " + this.subject);
         }
     }
+
+    private void checkIfTakenPrerequisite(){
+
+    }
+
+    private boolean hasTakenPrerequisite(Student other){return false;}
     private boolean hasSameSubjectConflict(Section other){return this.subject.equals(other.subject);}
     private boolean hasScheduleConflict(Section other) {return this.schedule.equals(other.schedule);}
 
