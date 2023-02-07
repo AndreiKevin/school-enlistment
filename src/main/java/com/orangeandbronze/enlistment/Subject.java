@@ -8,9 +8,9 @@ import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.commons.lang3.Validate.*;
 
 class Subject {
-    private final String subjectId;
-    private final Collection<Subject> prerequisites = new HashSet<>();
-    private final int units;
+    protected final String subjectId;
+    protected final Collection<Subject> prerequisites = new HashSet<>();
+    protected final int units;
 
     Subject(String subjectId, int units, Collection<Subject> prerequisites){
         notBlank(subjectId);
