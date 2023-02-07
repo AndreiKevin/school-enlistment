@@ -1,7 +1,7 @@
 package com.orangeandbronze.enlistment;
 
-public class MissingPrerequisiteException extends RuntimeException {
-    public MissingPrerequisiteException(String msg) {
+class MissingPrerequisiteException extends RuntimeException {
+     MissingPrerequisiteException(String msg) {
         super(msg);
     }
 }

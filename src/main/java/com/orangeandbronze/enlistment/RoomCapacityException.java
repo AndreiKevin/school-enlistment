@@ -1,7 +1,7 @@
 package com.orangeandbronze.enlistment;
 
-public class RoomCapacityException extends RuntimeException {
-    public RoomCapacityException(String msg) {
+class RoomCapacityException extends RuntimeException {
+    RoomCapacityException(String msg) {
         super(msg);
     }
 }

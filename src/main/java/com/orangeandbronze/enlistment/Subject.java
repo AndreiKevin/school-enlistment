@@ -12,7 +12,7 @@ class Subject {
     private final Collection<Subject> prerequisites = new HashSet<>();
     private final int units;
 
-    public Subject(String subjectId, int units, Collection<Subject> prerequisites){
+    Subject(String subjectId, int units, Collection<Subject> prerequisites){
         notBlank(subjectId);
         isTrue(isAlphanumeric(subjectId), "subjectId must be alphanumeric, was " + subjectId);
 
