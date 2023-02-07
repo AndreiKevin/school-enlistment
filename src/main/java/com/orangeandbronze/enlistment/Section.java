@@ -33,28 +33,21 @@ class Section {
     }
 
     private void checkSameSchedule(Section other){
-        if (hasScheduleConflict(other)) {
+        if (hasSameSchedule(other)) {
             throw new ScheduleConflictException("current section " + this +
                     " has same schedule as new section " + other +
                     " at schedule " + this.schedule);
         }
     }
     private void checkSameSubject(Section other){
-        if (hasSameSubjectConflict(other)) {
+        if (hasSameSubject(other)) {
             throw new SameSubjectException("current section " + this +
                     " has same subject as new section " + other +
                     " with subject " + this.subject);
         }
     }
-
-    private void checkIfTakenPrerequisite(){
-
-    }
-
-    private boolean hasTakenPrerequisite(Student other){return false;}
-    private boolean hasSameSubjectConflict(Section other){return this.subject.equals(other.subject);}
-    private boolean hasScheduleConflict(Section other) {return this.schedule.equals(other.schedule);}
-
+    private boolean hasSameSubject(Section other){return this.subject.equals(other.subject);}
+    private boolean hasSameSchedule(Section other) {return this.schedule.equals(other.schedule);}
 
     int getCurrentStudentOccupied() {
         return currentStudentOccupied;

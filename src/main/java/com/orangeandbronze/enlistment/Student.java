@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.Validate.*;
 class Student {
     private final int studentNumber;
     private final Collection<Section> sections = new HashSet<>();
-    private final Collection<Section> takenSections = new HashSet<>();
+    private final Collection<Subject> completedSubjects = new HashSet<>();
 
     Student(int studentNumber, Collection<Section> sections) {
         if(studentNumber < 0) {
