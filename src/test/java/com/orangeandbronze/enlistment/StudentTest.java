@@ -130,5 +130,21 @@ public class StudentTest {
                 () -> assertEquals(0, section.getCurrentStudentOccupied())
         );
     }
+
+    @Test
+    void enlist_2_sections_same_subjects_conflict(){
+        // Given 1 student and 2 sections w/ same schedule
+        Student student = new Student(1);
+        Room room1 = new Room("AGH20", 45);
+        Room room2 = new Room("HSS30", 45);
+        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room1, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), room2, DEFAULT_SUBJECT_A);
+
+        // When student enlist in both sections
+        student.enlist(sec1);
+
+        // Then at 2nd section an exception should be thrown
+        assertThrows(SameSubjectException.class, () -> student.enlist(sec2));
+    }
 }
 
