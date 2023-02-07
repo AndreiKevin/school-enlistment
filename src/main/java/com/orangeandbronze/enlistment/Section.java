@@ -27,6 +27,10 @@ class Section {
         this.subject = subject;
     }
 
+    void checkIfPrerequisitesTaken(Collection<Subject> takenSubjects) {
+        if(!subject.isPrerequisitesTaken(takenSubjects))
+            throw new MissingPrerequisiteException("Not all prerequisites have been taken");
+    }
 
     void checkForConflict(Section other) {
         checkSameSchedule(other);
@@ -75,11 +79,6 @@ class Section {
             throw new RemovingFromEmptyRoomException("Current student count is 0. Cannot remove any more students in room "
                     + this);
         }
-    }
-
-    void checkIfPrerequisitesTaken(Collection<Subject> takenSubjects) {
-        if(!subject.isPrerequisitesTaken(takenSubjects))
-            throw new MissingPrerequisiteException("Not all prerequisites have been taken");
     }
 
     @Override
