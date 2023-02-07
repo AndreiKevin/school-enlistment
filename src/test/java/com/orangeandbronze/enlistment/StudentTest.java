@@ -2,10 +2,7 @@ package com.orangeandbronze.enlistment;
 
 import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -158,6 +155,20 @@ public class StudentTest {
         // When student enlist in section with missing prerequisite
         // Then an exception should be thrown
         assertThrows(MissingPrerequisiteException.class, () -> student.enlist(sec));
+    }
+
+    @Test
+    void enlist_section_with_prerequisite(){
+        // Given 1 student and 1 section w/ prerequisite
+        Student student = new Student(1, Collections.emptyList(), Arrays.asList(DEFAULT_SUBJECT_A));
+        Room room = new Room("AGH20", 45);
+        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_C);
+
+        // When student enlist in section with missing prerequisite
+        student.enlist(sec);
+
+        // Then an exception should be thrown
+        assertEquals(student.getSections().size(), 1);
     }
 
 }

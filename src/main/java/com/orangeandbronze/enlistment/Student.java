@@ -1,7 +1,7 @@
 package com.orangeandbronze.enlistment;
 
 import java.util.*;
-
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.commons.lang3.Validate.*;
 
 class Student {
@@ -9,24 +9,30 @@ class Student {
     private final Collection<Section> sections = new HashSet<>();
     private final Collection<Subject> takenSubjects = new HashSet<>();
 
-    Student(int studentNumber, Collection<Section> sections) {
+    Student(int studentNumber, Collection<Section> sections, Collection<Subject> takenSubjects) {
         if(studentNumber < 0) {
             throw new IllegalArgumentException(
                     "studentNumber should be non-negative, was: "  + studentNumber);
         }
-        if (sections == null) {
-            throw new NullPointerException("sections should not be null");
-        }
+        notNull(sections);
+        notNull(takenSubjects);
 
         this.studentNumber = studentNumber;
+
         this.sections.addAll(sections);
         this.sections.removeIf(Objects::isNull);
-
         this.sections.forEach( currSection -> currSection.addStudent());
+
+        this.takenSubjects.addAll(takenSubjects);
+        this.takenSubjects.removeIf(Objects::isNull);
+    }
+
+    Student(int studentNumber, Collection<Section> sections) {
+        this(studentNumber, sections, Collections.emptyList());
     }
 
     Student(int studentNumber) {
-        this(studentNumber, Collections.emptyList());
+        this(studentNumber, Collections.emptyList(), Collections.emptyList());
     }
 
     void enlist(Section newSection) {
