@@ -1,5 +1,6 @@
 package com.orangeandbronze.enlistment;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ class Subject {
     protected final String subjectId;
     protected final Collection<Subject> prerequisites = new HashSet<>();
     protected final int units;
+    private final static BigDecimal SUBJECT_FEE_PER_UNIT = new BigDecimal("2000");
 
     Subject(String subjectId, int units, Collection<Subject> prerequisites){
         notBlank(subjectId);
@@ -35,6 +37,10 @@ class Subject {
 
     boolean isPrerequisitesTaken(Collection<Subject> takenSubjects) {
         return takenSubjects.containsAll(prerequisites);
+    }
+
+    BigDecimal getFees(){
+        return SUBJECT_FEE_PER_UNIT.multiply(BigDecimal.valueOf(this.units));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.orangeandbronze.enlistment;
 
+import java.math.BigDecimal;
 import java.util.*;
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.commons.lang3.Validate.*;
@@ -53,6 +54,9 @@ class Section {
     private boolean hasSameSubject(Section other){return this.subject.equals(other.subject);}
     private boolean hasSameSchedule(Section other) {return this.schedule.equals(other.schedule);}
 
+    BigDecimal getFees(){
+        return subject.getFees();
+    }
 
     int getCurrentStudentOccupied() {
         return currentStudentOccupied;

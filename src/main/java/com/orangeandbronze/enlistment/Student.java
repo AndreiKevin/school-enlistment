@@ -1,7 +1,8 @@
 package com.orangeandbronze.enlistment;
 
+import java.math.BigDecimal;
 import java.util.*;
-import static org.apache.commons.lang3.StringUtils.*;
+
 import static org.apache.commons.lang3.Validate.*;
 
 class Student {
@@ -53,6 +54,10 @@ class Student {
 
         sections.remove(section);
         section.removeStudent();
+    }
+
+    BigDecimal requestAssessment(){
+        return AssessmentHandler.assess(sections);
     }
 
     public Collection<Section> getSections() {
