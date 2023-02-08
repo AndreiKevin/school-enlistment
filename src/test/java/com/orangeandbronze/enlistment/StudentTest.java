@@ -2,6 +2,7 @@ package com.orangeandbronze.enlistment;
 
 import org.junit.jupiter.api.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,6 +13,7 @@ public class StudentTest {
     static final Subject DEFAULT_SUBJECT_A = new Subject("A", 1);
     static final Subject DEFAULT_SUBJECT_B = new Subject("B", 1);
     static final Subject DEFAULT_SUBJECT_C = new Subject("C", 3, Arrays.asList(DEFAULT_SUBJECT_A));
+    static final LaboratorySubject DEFAULT_LAB_SUBJECT_A = new LaboratorySubject("A", 1, Collections.emptyList());
     @Test
     void enlist_2_sections_no_conflict() {
         // Given 1 student and 2 sections with no conflict
@@ -169,6 +171,42 @@ public class StudentTest {
 
         // Then an exception should be thrown
         assertEquals(student.getSections().size(), 1);
+    }
+
+    @Test
+    void get_assessment_for_units_without_lab(){
+        // Given a student with 3 non-laboratory sections of 5 units total
+        Room room = new Room("AGH20", 10);
+
+        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), room, DEFAULT_SUBJECT_B);
+        Section section3 = new Section("C", new Schedule(Days.MTH, Period.H1300), room, DEFAULT_SUBJECT_C);
+
+        Student student = new Student(1, Arrays.asList(section1, section2, section3));
+
+        // Assessment of fees should return 14560
+        // 1.12((2000 * 5) + 3000) == 14560
+        AssessmentHandler assessment_handler = new AssessmentHandler();
+        BigDecimal totalFees = AssessmentHandler.assess(student.getSections());
+        assertTrue(BigDecimal.valueOf(14560).compareTo(totalFees) == 0);
+    }
+
+    @Test
+    void get_assessment_for_units_with_lab(){
+        // Given a student with 2 non-laboratory sections and 1 laboratory subject of 3 units total
+        Room room = new Room("AGH20", 10);
+
+        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), room, DEFAULT_SUBJECT_B);
+        Section lab_section1 = new Section("C", new Schedule(Days.MTH, Period.H1300), room, DEFAULT_LAB_SUBJECT_A);
+
+        Student student = new Student(1, Arrays.asList(section1, section2, lab_section1));
+
+        // Assessment of fees should return 11200
+        // 1.12((2000 * 3) + 1000 + 3000) == 11200
+        AssessmentHandler assessment_handler = new AssessmentHandler();
+        BigDecimal totalFees = AssessmentHandler.assess(student.getSections());
+        assertTrue(BigDecimal.valueOf(11200).compareTo(totalFees) == 0);
     }
 
 }
