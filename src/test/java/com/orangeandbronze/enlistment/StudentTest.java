@@ -186,8 +186,7 @@ public class StudentTest {
 
         // Assessment of fees should return 14560
         // 1.12((2000 * 5) + 3000) == 14560
-        AssessmentHandler assessment_handler = new AssessmentHandler();
-        BigDecimal totalFees = AssessmentHandler.assess(student.getSections());
+        BigDecimal totalFees = student.requestAssessment();
         assertTrue(BigDecimal.valueOf(14560).compareTo(totalFees) == 0);
     }
 
@@ -204,8 +203,7 @@ public class StudentTest {
 
         // Assessment of fees should return 11200
         // 1.12((2000 * 3) + 1000 + 3000) == 11200
-        AssessmentHandler assessment_handler = new AssessmentHandler();
-        BigDecimal totalFees = AssessmentHandler.assess(student.getSections());
+        BigDecimal totalFees = student.requestAssessment();
         assertTrue(BigDecimal.valueOf(11200).compareTo(totalFees) == 0);
     }
 
