@@ -60,7 +60,7 @@ class Student {
         return AssessmentHandler.assess(sections);
     }
 
-    public Collection<Section> getSections() {
+    Collection<Section> getSections() {
         return new ArrayList<>(sections);
     }
 
