@@ -9,14 +9,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentTest {
 
-    static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, Period.H1430);
-    static final Subject DEFAULT_SUBJECT_A = new Subject("A", 1);
-    static final Subject DEFAULT_SUBJECT_B = new Subject("B", 1);
-    static final Subject DEFAULT_SUBJECT_C = new Subject("C", 3, Arrays.asList(DEFAULT_SUBJECT_A));
-    static final LaboratorySubject DEFAULT_LAB_SUBJECT_A = new LaboratorySubject("A", 1, Collections.emptyList());
+    private static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, Period.H1430);
+    private static final Subject DEFAULT_SUBJECT_A = new Subject("A", 1);
+    private static final Subject DEFAULT_SUBJECT_B = new Subject("B", 1);
+    private static final Subject DEFAULT_SUBJECT_C = new Subject("C", 3, Arrays.asList(DEFAULT_SUBJECT_A));
+    private static final Subject DEFAULT_SUBJECT_D = new Subject("D", 3);
+    private static final LaboratorySubject DEFAULT_LAB_SUBJECT_A = new LaboratorySubject("A", 1, Collections.emptyList());
 
-    static final DegreeProgram DEFAULT_DEGREE_PROGRAM = new DegreeProgram(Arrays.asList(DEFAULT_SUBJECT_A, DEFAULT_SUBJECT_B,
+    private static final DegreeProgram DEFAULT_DEGREE_PROGRAM = new DegreeProgram(Arrays.asList(DEFAULT_SUBJECT_A, DEFAULT_SUBJECT_B,
             DEFAULT_LAB_SUBJECT_A, DEFAULT_SUBJECT_C));
+
+    private static final Room DEFAULT_ROOM = new Room("AGH20", 45);
 
     @Test
     void enlist_2_sections_no_conflict() {
@@ -25,9 +28,8 @@ public class StudentTest {
                 .setStudentNumber(1)
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
                 .getResult();
-        Room room = new Room("AGH20", 45);
-        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_A);
-        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), room, DEFAULT_SUBJECT_B);
+        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), DEFAULT_ROOM, DEFAULT_SUBJECT_B);
 
         // When the student enlists in both sections
         student.enlist(sec1);
@@ -107,11 +109,9 @@ public class StudentTest {
     @Test
     void cancel_does_not_belong_to_class(){
         //Given 2 sections and a student enlisted in one of the sections
-        Room room1 = new Room("AGH20", 10);
-        Room room2 = new Room("AGH35", 10);
 
-        Section section1 = new Section("A", DEFAULT_SCHEDULE, room1, DEFAULT_SUBJECT_A);
-        Section section2 = new Section("B", DEFAULT_SCHEDULE, room2, DEFAULT_SUBJECT_A);
+        Section section1 = new Section("A", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_A);
 
         Student student = (new StudentBuilder())
                 .setStudentNumber(1)
@@ -129,8 +129,7 @@ public class StudentTest {
     @Test
     void cancel_belongs_to_class(){
         //Given a section and a student
-        Room room = new Room("AGH20", 10);
-        Section section = new Section("S12", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
+        Section section = new Section("S12", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_A);
 
         Student student = (new StudentBuilder())
                 .setStudentNumber(1)
@@ -173,10 +172,8 @@ public class StudentTest {
                 .setStudentNumber(1)
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
                 .getResult();
-        Room room1 = new Room("AGH20", 45);
-        Room room2 = new Room("HSS30", 45);
-        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room1, DEFAULT_SUBJECT_A);
-        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), room2, DEFAULT_SUBJECT_A);
+        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
 
         // When student enlist in both sections
         student.enlist(sec1);
@@ -193,8 +190,7 @@ public class StudentTest {
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
                 .getResult();
 
-        Room room = new Room("AGH20", 45);
-        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_C);
+        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_C);
 
         // When student enlist in section with missing prerequisite
         // Then an exception should be thrown
@@ -205,8 +201,7 @@ public class StudentTest {
     void enlist_section_with_prerequisite(){
         // Given 1 student and 1 section w/ prerequisite
         Student student = new Student(1, DEFAULT_DEGREE_PROGRAM,Collections.emptyList(), Arrays.asList(DEFAULT_SUBJECT_A));
-        Room room = new Room("AGH20", 45);
-        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_C);
+        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_C);
 
         // When student enlist in section with missing prerequisite
         student.enlist(sec);
@@ -218,11 +213,10 @@ public class StudentTest {
     @Test
     void get_assessment_for_units_without_lab(){
         // Given a student with 3 non-laboratory sections of 5 units total
-        Room room = new Room("AGH20", 10);
 
-        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_A);
-        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), room, DEFAULT_SUBJECT_B);
-        Section section3 = new Section("C", new Schedule(Days.MTH, Period.H1300), room, DEFAULT_SUBJECT_C);
+        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), DEFAULT_ROOM, DEFAULT_SUBJECT_B);
+        Section section3 = new Section("C", new Schedule(Days.MTH, Period.H1300), DEFAULT_ROOM, DEFAULT_SUBJECT_C);
 
         List<Section> sections=  Arrays.asList(section1, section2, section3);
 
@@ -235,11 +229,9 @@ public class StudentTest {
     @Test
     void get_assessment_for_units_with_lab(){
         // Given a student with 2 non-laboratory sections and 1 laboratory subject of 3 units total
-        Room room = new Room("AGH20", 10);
-
-        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_A);
-        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), room, DEFAULT_SUBJECT_B);
-        Section lab_section1 = new Section("C", new Schedule(Days.MTH, Period.H1300), room, DEFAULT_LAB_SUBJECT_A);
+        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), DEFAULT_ROOM, DEFAULT_SUBJECT_B);
+        Section lab_section1 = new Section("C", new Schedule(Days.MTH, Period.H1300), DEFAULT_ROOM, DEFAULT_LAB_SUBJECT_A);
 
         List<Section> sections = Arrays.asList(section1, section2, lab_section1);
 
