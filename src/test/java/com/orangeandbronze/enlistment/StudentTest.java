@@ -37,7 +37,7 @@ public class StudentTest {
 
         // Then we'll find both sections inside the student and
         // only those sections (no others)
-        Collection<Section> sections = student.getEnrolledSections();
+        Collection<Section> sections = student.getEnlistedSections();
         assertAll(
                 () -> assertTrue(sections.containsAll(List.of(sec1, sec2))),
                 () -> assertEquals(2, sections.size())
@@ -116,7 +116,7 @@ public class StudentTest {
         Student student = (new StudentBuilder())
                 .setStudentNumber(1)
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
-                .setEnrolledSections(Arrays.asList(section1))
+                .setEnlistedSections(Arrays.asList(section1))
                 .getResult();
 
         //When student 1 is enlisted in section 1, but tries to cancel from section 2.
@@ -134,14 +134,14 @@ public class StudentTest {
         Student student = (new StudentBuilder())
                 .setStudentNumber(1)
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
-                .setEnrolledSections(Arrays.asList(section))
+                .setEnlistedSections(Arrays.asList(section))
                 .getResult();
 
         //When student cancels enlistment
         student.cancel(section);
 
         //They should not be a part of any section
-        assertEquals(0, student.getEnrolledSections().size());
+        assertEquals(0, student.getEnlistedSections().size());
     }
 
     @Test
@@ -154,13 +154,13 @@ public class StudentTest {
         Student student = (new StudentBuilder())
                 .setStudentNumber(1)
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
-                .setEnrolledSections(Arrays.asList(section))
+                .setEnlistedSections(Arrays.asList(section))
                 .getResult();
         student.cancel(section);
 
         //Then remove from student's section list and decrement capacity
         assertAll(
-                () -> assertFalse(student.getEnrolledSections().contains(section)),
+                () -> assertFalse(student.getEnlistedSections().contains(section)),
                 () -> assertEquals(0, section.getCurrentStudentOccupied())
         );
     }
@@ -211,7 +211,7 @@ public class StudentTest {
         student.enlist(sec);
 
         // Then an exception should be thrown
-        assertEquals(student.getEnrolledSections().size(), 1);
+        assertEquals(student.getEnlistedSections().size(), 1);
     }
 
     @Test
