@@ -190,7 +190,7 @@ public class StudentTest {
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
                 .getResult();
 
-        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_C);
+        Section sec = new Section("A", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_C);
 
         // When student enlist in section with missing prerequisite
         // Then an exception should be thrown
@@ -205,7 +205,7 @@ public class StudentTest {
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
                 .setTakenSubjects(Arrays.asList(DEFAULT_SUBJECT_A))
                 .getResult();
-        Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_C);
+        Section sec = new Section("A", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_C);
 
         // When student enlist in section with missing prerequisite
         student.enlist(sec);
@@ -218,9 +218,9 @@ public class StudentTest {
     void get_assessment_for_units_without_lab(){
         // Given a student with 3 non-laboratory sections of 5 units total
 
-        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
-        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), DEFAULT_ROOM, DEFAULT_SUBJECT_B);
-        Section section3 = new Section("C", new Schedule(Days.MTH, Period.H1300), DEFAULT_ROOM, DEFAULT_SUBJECT_C);
+        Section section1 = new Section("A", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_B);
+        Section section3 = new Section("C", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_C);
 
         List<Section> sections=  Arrays.asList(section1, section2, section3);
 
@@ -233,9 +233,9 @@ public class StudentTest {
     @Test
     void get_assessment_for_units_with_lab(){
         // Given a student with 2 non-laboratory sections and 1 laboratory subject of 3 units total
-        Section section1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
-        Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), DEFAULT_ROOM, DEFAULT_SUBJECT_B);
-        Section lab_section1 = new Section("C", new Schedule(Days.MTH, Period.H1300), DEFAULT_ROOM, DEFAULT_LAB_SUBJECT_A);
+        Section section1 = new Section("A", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section section2 = new Section("B", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_B);
+        Section lab_section1 = new Section("C", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_LAB_SUBJECT_A);
 
         List<Section> sections = Arrays.asList(section1, section2, lab_section1);
 
