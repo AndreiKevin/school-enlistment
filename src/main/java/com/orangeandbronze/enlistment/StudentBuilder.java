@@ -5,7 +5,7 @@ import static org.apache.commons.lang3.Validate.*;
 
 class StudentBuilder {
     private int studentNumber = -1;
-    private Collection<Section> sections = new HashSet<>();
+    private Collection<Section> enrolledSections = new HashSet<>();
     private Collection<Subject> takenSubjects = new HashSet<>();
     private DegreeProgram degreeProgram = new DegreeProgram();
 
@@ -20,7 +20,7 @@ class StudentBuilder {
         }
         notNull(degreeProgram);
 
-        return new Student(studentNumber, degreeProgram, sections, takenSubjects);
+        return new Student(studentNumber, degreeProgram, enrolledSections, takenSubjects);
     }
     StudentBuilder setStudentNumber(int studentNumber){
         if(studentNumber < 0) {
@@ -33,11 +33,11 @@ class StudentBuilder {
         return this;
     }
 
-    StudentBuilder setSections(Collection<Section> sections){
-        notNull(sections);
+    StudentBuilder setEnrolledSections(Collection<Section> enrolledSections){
+        notNull(enrolledSections);
 
-        this.sections.addAll(sections);
-        this.sections.removeIf(Objects::isNull);
+        this.enrolledSections.addAll(enrolledSections);
+        this.enrolledSections.removeIf(Objects::isNull);
 
         return this;
     }
