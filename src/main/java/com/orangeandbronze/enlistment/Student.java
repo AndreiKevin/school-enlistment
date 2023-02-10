@@ -9,16 +9,19 @@ class Student {
     private final int studentNumber;
     private final Collection<Section> sections = new HashSet<>();
     private final Collection<Subject> takenSubjects = new HashSet<>();
+    private final DegreeProgram degreeProgram;
 
-    Student(int studentNumber, Collection<Section> sections, Collection<Subject> takenSubjects) {
+    Student(int studentNumber, DegreeProgram degreeProgram, Collection<Section> sections, Collection<Subject> takenSubjects) {
         if(studentNumber < 0) {
             throw new IllegalArgumentException(
                     "studentNumber should be non-negative, was: "  + studentNumber);
         }
         notNull(sections);
         notNull(takenSubjects);
+        notNull(degreeProgram);
 
         this.studentNumber = studentNumber;
+        this.degreeProgram = degreeProgram;
 
         this.sections.addAll(sections);
         this.sections.removeIf(Objects::isNull);
@@ -28,12 +31,12 @@ class Student {
         this.takenSubjects.removeIf(Objects::isNull);
     }
 
-    Student(int studentNumber, Collection<Section> sections) {
-        this(studentNumber, sections, Collections.emptyList());
+    Student(int studentNumber, DegreeProgram degreeProgram, Collection<Section> sections) {
+        this(studentNumber, degreeProgram, sections, Collections.emptyList());
     }
 
-    Student(int studentNumber) {
-        this(studentNumber, Collections.emptyList(), Collections.emptyList());
+    Student(int studentNumber, DegreeProgram degreeProgram) {
+        this(studentNumber, degreeProgram, Collections.emptyList(), Collections.emptyList());
     }
 
     void enlist(Section newSection) {
