@@ -2,8 +2,8 @@ package com.orangeandbronze.enlistment;
 
 import java.math.BigDecimal;
 import java.util.*;
-
 import static org.apache.commons.lang3.Validate.*;
+
 
 class Student {
     private final int studentNumber;
@@ -12,31 +12,13 @@ class Student {
     private final DegreeProgram degreeProgram;
 
     Student(int studentNumber, DegreeProgram degreeProgram, Collection<Section> sections, Collection<Subject> takenSubjects) {
-        if(studentNumber < 0) {
-            throw new IllegalArgumentException(
-                    "studentNumber should be non-negative, was: "  + studentNumber);
-        }
-        notNull(sections);
-        notNull(takenSubjects);
-        notNull(degreeProgram);
-
         this.studentNumber = studentNumber;
         this.degreeProgram = degreeProgram;
 
         this.sections.addAll(sections);
-        this.sections.removeIf(Objects::isNull);
         this.sections.forEach( currSection -> currSection.addStudent());
 
         this.takenSubjects.addAll(takenSubjects);
-        this.takenSubjects.removeIf(Objects::isNull);
-    }
-
-    Student(int studentNumber, DegreeProgram degreeProgram, Collection<Section> sections) {
-        this(studentNumber, degreeProgram, sections, Collections.emptyList());
-    }
-
-    Student(int studentNumber, DegreeProgram degreeProgram) {
-        this(studentNumber, degreeProgram, Collections.emptyList(), Collections.emptyList());
     }
 
     void enlist(Section newSection) {

@@ -21,7 +21,10 @@ public class StudentTest {
     @Test
     void enlist_2_sections_no_conflict() {
         // Given 1 student and 2 sections with no conflict
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM);
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .getResult();
         Room room = new Room("AGH20", 45);
         Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_A);
         Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), room, DEFAULT_SUBJECT_B);
@@ -42,7 +45,10 @@ public class StudentTest {
     @Test
     void enlist_2_sections_same_schedule() {
         // Given 1 student and 2 sections w/ same schedule
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM);
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .getResult();
         Room room1 = new Room("AGH20", 45);
         Room room2 = new Room("HSS30", 45);
         Section sec1 = new Section("A", DEFAULT_SCHEDULE, room1, DEFAULT_SUBJECT_A);
@@ -58,8 +64,15 @@ public class StudentTest {
     @Test
     void enlist_room_capacity_full(){
         //Given 2 students  and a section that has a room capacity of 1
-        Student student1 = new Student(1, DEFAULT_DEGREE_PROGRAM);
-        Student student2 = new Student(2, DEFAULT_DEGREE_PROGRAM);
+        Student student1 = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .getResult();
+        Student student2 = (new StudentBuilder())
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .setStudentNumber(2)
+                .getResult();
+
         Room room = new Room("AGH20", 1);
         Section sec = new Section("A", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
@@ -73,8 +86,14 @@ public class StudentTest {
     @Test
     void enlist_room_capacity_not_full(){
         //Given 2 students and a section that has a room capacity of 2
-        Student student1 = new Student(1, DEFAULT_DEGREE_PROGRAM);
-        Student student2 = new Student(2, DEFAULT_DEGREE_PROGRAM);
+        Student student1 = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .getResult();
+        Student student2 = (new StudentBuilder())
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .setStudentNumber(2)
+                .getResult();
         Room room = new Room("AGH20", 2);
         Section sec = new Section("A", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
@@ -94,7 +113,11 @@ public class StudentTest {
         Section section1 = new Section("A", DEFAULT_SCHEDULE, room1, DEFAULT_SUBJECT_A);
         Section section2 = new Section("B", DEFAULT_SCHEDULE, room2, DEFAULT_SUBJECT_A);
 
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM, Arrays.asList(section1));
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .setSections(Arrays.asList(section1))
+                .getResult();
 
         //When student 1 is enlisted in section 1, but tries to cancel from section 2.
 
@@ -109,7 +132,11 @@ public class StudentTest {
         Room room = new Room("AGH20", 10);
         Section section = new Section("S12", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM, Arrays.asList(section));
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .setSections(Arrays.asList(section))
+                .getResult();
 
         //When student cancels enlistment
         student.cancel(section);
@@ -125,12 +152,16 @@ public class StudentTest {
         Section section = new Section("A", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A);
 
         //When student cancels enlistment to a section
-        Student student1 = new Student(1, DEFAULT_DEGREE_PROGRAM, Arrays.asList(section));
-        student1.cancel(section);
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .setSections(Arrays.asList(section))
+                .getResult();
+        student.cancel(section);
 
         //Then remove from student's section list and decrement capacity
         assertAll(
-                () -> assertFalse(student1.getSections().contains(section)),
+                () -> assertFalse(student.getSections().contains(section)),
                 () -> assertEquals(0, section.getCurrentStudentOccupied())
         );
     }
@@ -138,7 +169,10 @@ public class StudentTest {
     @Test
     void enlist_2_sections_same_subjects_conflict(){
         // Given 1 student and 2 sections w/ same schedule
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM);
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .getResult();
         Room room1 = new Room("AGH20", 45);
         Room room2 = new Room("HSS30", 45);
         Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), room1, DEFAULT_SUBJECT_A);
@@ -154,7 +188,11 @@ public class StudentTest {
     @Test
     void enlist_section_with_missing_prerequisite(){
         // Given 1 student and 1 section w/ prerequisite
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM);
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .getResult();
+        
         Room room = new Room("AGH20", 45);
         Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), room, DEFAULT_SUBJECT_C);
 

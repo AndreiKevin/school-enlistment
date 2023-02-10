@@ -14,11 +14,15 @@ class DegreeProgram {
         this.subjects.addAll(subjects);
     }
 
+    public DegreeProgram(){
+
+    }
+
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(subjects);
