@@ -186,11 +186,11 @@ public class StudentTest {
         Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), room, DEFAULT_SUBJECT_B);
         Section section3 = new Section("C", new Schedule(Days.MTH, Period.H1300), room, DEFAULT_SUBJECT_C);
 
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM,Arrays.asList(section1, section2, section3));
+        List<Section> sections=  Arrays.asList(section1, section2, section3);
 
         // Assessment of fees should return 14560
         // 1.12((2000 * 5) + 3000) == 14560
-        BigDecimal totalFees = student.requestAssessment();
+        BigDecimal totalFees = AssessmentHandler.assess(sections);
         assertTrue(BigDecimal.valueOf(14560).compareTo(totalFees) == 0);
     }
 
@@ -203,11 +203,11 @@ public class StudentTest {
         Section section2 = new Section("B", new Schedule(Days.MTH, Period.H1130), room, DEFAULT_SUBJECT_B);
         Section lab_section1 = new Section("C", new Schedule(Days.MTH, Period.H1300), room, DEFAULT_LAB_SUBJECT_A);
 
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM,Arrays.asList(section1, section2, lab_section1));
+        List<Section> sections = Arrays.asList(section1, section2, lab_section1);
 
         // Assessment of fees should return 11200
         // 1.12((2000 * 3) + 1000 + 3000) == 11200
-        BigDecimal totalFees = student.requestAssessment();
+        BigDecimal totalFees = AssessmentHandler.assess(sections);
         assertTrue(BigDecimal.valueOf(11200).compareTo(totalFees) == 0);
     }
 
