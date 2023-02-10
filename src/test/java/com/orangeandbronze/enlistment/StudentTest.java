@@ -200,7 +200,11 @@ public class StudentTest {
     @Test
     void enlist_section_with_prerequisite(){
         // Given 1 student and 1 section w/ prerequisite
-        Student student = new Student(1, DEFAULT_DEGREE_PROGRAM,Collections.emptyList(), Arrays.asList(DEFAULT_SUBJECT_A));
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .setTakenSubjects(Arrays.asList(DEFAULT_SUBJECT_A))
+                .getResult();
         Section sec = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_C);
 
         // When student enlist in section with missing prerequisite
