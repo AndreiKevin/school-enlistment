@@ -28,15 +28,13 @@ class Section {
         this.subject = subject;
     }
 
-    void checkIfPrerequisitesTaken(Collection<Subject> takenSubjects) {
-        if(!subject.isPrerequisitesTaken(takenSubjects))
-            throw new MissingPrerequisiteException("Not all prerequisites have been taken");
-    }
 
     void checkForConflict(Section other) {
         checkSameSchedule(other);
         checkSameSubject(other);
     }
+
+
     private void checkSameSchedule(Section other){
         if (hasSameSchedule(other)) {
             throw new ScheduleConflictException("current section " + this +
@@ -53,10 +51,6 @@ class Section {
     }
     private boolean hasSameSubject(Section other){return this.subject.equals(other.subject);}
     private boolean hasSameSchedule(Section other) {return this.schedule.equals(other.schedule);}
-
-    BigDecimal getFees(){
-        return subject.getFees();
-    }
 
     int getCurrentStudentOccupied() {
         return currentStudentOccupied;
@@ -83,6 +77,14 @@ class Section {
             throw new RemovingFromEmptyRoomException("Current student count is 0. Cannot remove any more students in room "
                     + this);
         }
+    }
+
+    BigDecimal getFees(){
+        return subject.getFees();
+    }
+
+    Subject getSubject(){
+        return subject;
     }
 
     @Override

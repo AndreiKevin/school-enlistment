@@ -245,5 +245,22 @@ public class StudentTest {
         assertTrue(BigDecimal.valueOf(11200).compareTo(totalFees) == 0);
     }
 
+    @Test
+    void enroll_to_section_not_in_degree_program() {
+        // Given a student, and a section for a subject not in their degree program
+        DegreeProgram degreeProgram = new DegreeProgram(Arrays.asList(DEFAULT_SUBJECT_A, DEFAULT_SUBJECT_B, DEFAULT_SUBJECT_C));
+
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(degreeProgram)
+                .getResult();
+        Section section = new Section("D", DEFAULT_SCHEDULE, DEFAULT_ROOM, DEFAULT_SUBJECT_D);
+
+        // WHen the student enlists
+        // An error is thrown
+        assertThrows(NotInDegreeProgramException.class, () -> student.enlist(section));
+
+    }
+
 }
 

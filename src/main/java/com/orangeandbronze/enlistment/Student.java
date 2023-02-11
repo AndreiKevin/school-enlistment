@@ -24,10 +24,25 @@ class Student {
     void enlist(Section newSection) {
         notNull(newSection);
         enlistedSections.forEach(currSection -> currSection.checkForConflict(newSection));
-        newSection.checkIfPrerequisitesTaken(takenSubjects);
+
+        Subject subject = newSection.getSubject();
+        this.checkIfCanTakeSubject(subject);
 
         enlistedSections.add(newSection);
         newSection.addStudent();
+    }
+
+    private void checkIfCanTakeSubject(Subject subject){
+        this.checkIfPrerequisitesTaken(subject);
+        this.checkIfInDegreeProgram(subject);
+    }
+    private void checkIfPrerequisitesTaken(Subject subject) {
+        if(! subject.isPrerequisitesTaken(takenSubjects))
+            throw new MissingPrerequisiteException("Not all prerequisites have been taken");
+    }
+
+    private void checkIfInDegreeProgram(Subject subject){
+        degreeProgram.checkIfHasSubject(subject);
     }
 
     void cancel(Section section){

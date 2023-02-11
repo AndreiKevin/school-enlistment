@@ -18,6 +18,12 @@ class DegreeProgram {
 
     }
 
+    void checkIfHasSubject(Subject subject){
+        if (! this.subjects.contains(subject)){
+            throw new NotInDegreeProgramException("Subject " + subject + " is not in degree program");
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
