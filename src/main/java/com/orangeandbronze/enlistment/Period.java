@@ -8,10 +8,15 @@ public class Period {
     private final int start;
     private final int end;
     Period(int start, int end) {
+        checkValidDuration(start, end);
         checkEndBeforeStart(start, end);
         // 830 - 1730
         this.start = start;
         this.end = end;
+    }
+    private void checkValidDuration(int start, int end) {
+        if(start < 830 || start > 1730 || end < 830 || end > 1730)
+            throw new InvalidPeriodException("The start or end is before 830 or after 1730");
     }
 
     private void checkEndBeforeStart(int start, int end) {
