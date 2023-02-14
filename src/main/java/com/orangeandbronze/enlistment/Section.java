@@ -15,6 +15,7 @@ class Section {
 
 
     Section(String sectionId, Schedule schedule, Room room, Subject subject) {
+        room.getHeldSections().forEach(currSection -> currSection.checkForConflict(this));
         notBlank(sectionId);
         isTrue(isAlphanumeric(sectionId), "sectionId must be alphanumeric, was " + sectionId);
 

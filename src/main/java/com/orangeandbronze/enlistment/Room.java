@@ -6,6 +6,7 @@ import static org.apache.commons.lang3.Validate.*;
 import java.util.*;
 
 class Room {
+    private Collection<Section> heldSections = new HashSet<>();
     private final String roomName;
     protected final int capacity;
 
@@ -20,6 +21,19 @@ class Room {
         this.capacity = capacity;
     }
 
+    Room(String roomName, int capacity, Collection<Section> heldSections){
+        this(roomName, capacity);
+        this.heldSections.addAll(heldSections);
+    }
+
+    Collection<Section> getHeldSections(){
+        return new ArrayList<Section>(heldSections);
+    }
+
+    void addSection(Section newSection){
+        notNull(newSection);
+        heldSections.add(newSection);
+    }
 
     @Override
     public String toString() {

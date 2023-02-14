@@ -14,6 +14,6 @@ public class SectionTest {
 
         // When a new section with the same room and schedule is made
         // Then throw an error
-        assertThrows(SectionOverlapException.class, () -> new Section("2", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A));
+        assertThrows(ScheduleConflictException.class, () -> new Section("2", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_A));
     }
 }
