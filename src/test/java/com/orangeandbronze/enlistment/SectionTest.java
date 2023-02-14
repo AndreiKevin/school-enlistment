@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class SectionTest {
-    private static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, Period.H1430);
+    private static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, new Period(830, 1030));
     private static final Subject DEFAULT_SUBJECT_A = new Subject("A", 1);
     private static final Subject DEFAULT_SUBJECT_B = new Subject("B", 1);
     @Test

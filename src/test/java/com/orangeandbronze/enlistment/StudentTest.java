@@ -8,8 +8,8 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentTest {
-
-    private static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, Period.H1430);
+    private static final Period DEFAULT_PERIOD = new Period(1000, 1100);
+    private static final Schedule DEFAULT_SCHEDULE = new Schedule(Days.MTH, DEFAULT_PERIOD);
     private static final Subject DEFAULT_SUBJECT_A = new Subject("A", 1);
     private static final Subject DEFAULT_SUBJECT_B = new Subject("B", 1);
     private static final Subject DEFAULT_SUBJECT_C = new Subject("C", 3, Arrays.asList(DEFAULT_SUBJECT_A));
@@ -28,8 +28,8 @@ public class StudentTest {
                 .setStudentNumber(1)
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
                 .getResult();
-        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
-        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), DEFAULT_ROOM, DEFAULT_SUBJECT_B);
+        Section sec1 = new Section("A", new Schedule(Days.MTH, DEFAULT_PERIOD), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", new Schedule(Days.TF, DEFAULT_PERIOD), DEFAULT_ROOM, DEFAULT_SUBJECT_B);
 
         // When the student enlists in both sections
         student.enlist(sec1);
@@ -172,8 +172,8 @@ public class StudentTest {
                 .setStudentNumber(1)
                 .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
                 .getResult();
-        Section sec1 = new Section("A", new Schedule(Days.MTH, Period.H1000), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
-        Section sec2 = new Section("B", new Schedule(Days.TF, Period.H1430), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section sec1 = new Section("A", new Schedule(Days.MTH, DEFAULT_PERIOD), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", new Schedule(Days.TF, DEFAULT_PERIOD), DEFAULT_ROOM, DEFAULT_SUBJECT_A);
 
         // When student enlist in both sections
         student.enlist(sec1);
