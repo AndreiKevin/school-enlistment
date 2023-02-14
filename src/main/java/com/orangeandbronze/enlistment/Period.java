@@ -8,9 +8,16 @@ public class Period {
     private final int start;
     private final int end;
     Period(int start, int end) {
+        checkEndBeforeStart(start, end);
         // 830 - 1730
         this.start = start;
         this.end = end;
+    }
+
+    private void checkEndBeforeStart(int start, int end) {
+        if(start >= end) {
+            throw new InvalidPeriodException("End period is at the start or before the start of the period");
+        }
     }
 
     @Override
