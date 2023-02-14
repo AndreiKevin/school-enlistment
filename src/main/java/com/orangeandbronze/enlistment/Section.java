@@ -26,13 +26,12 @@ class Section {
         this.sectionId = sectionId;
         this.schedule = schedule;
 
-
+        room.getHeldSections().forEach(currSection -> currSection.checkForConflict(this));
 
         this.room = room;
         this.subject = subject;
         this.room.addSection(this);
 
-        room.getHeldSections().forEach(currSection -> currSection.checkForConflict(this));
     }
 
     int getSubjectUnits(){

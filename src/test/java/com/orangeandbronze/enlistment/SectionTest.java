@@ -17,7 +17,7 @@ public class SectionTest {
         // Then throw an error
         assertAll(
                 () -> assertThrows(ScheduleConflictException.class, () -> new Section("2", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_B)),
-                () -> assertEquals(room.getHeldSections().size(), '0')
+                () -> assertEquals(room.getHeldSections().size(), 1)
         );
     }
 }
