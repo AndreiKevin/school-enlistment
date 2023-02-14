@@ -30,6 +30,14 @@ public class PeriodTest {
         );
     }
 
+    @Test
+    void period_within_30_min_increments() {
+        assertAll(
+                () -> assertThrows(InvalidPeriodException.class, () -> new Period(875, 1000)),
+                () -> assertThrows(InvalidPeriodException.class, () -> new Period(830, 1045))
+        );
+    }
+
 
 
 

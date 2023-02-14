@@ -8,12 +8,22 @@ public class Period {
     private final int start;
     private final int end;
     Period(int start, int end) {
+        check30MinuteIncrement(start, end);
         checkValidDuration(start, end);
         checkEndBeforeStart(start, end);
         // 830 - 1730
         this.start = start;
         this.end = end;
     }
+    private void check30MinuteIncrement(int start, int end) {
+        int startHundreds = start % 100;
+        int endHundreds = end % 100;
+        int interval = Math.abs(startHundreds - endHundreds);
+        if (interval != 30 && interval != 0) {
+            throw new InvalidPeriodException("The time must be in increments of 30");
+        }
+    }
+
     private void checkValidDuration(int start, int end) {
         if(start < 830 || start > 1730 || end < 830 || end > 1730)
             throw new InvalidPeriodException("The start or end is before 830 or after 1730");
