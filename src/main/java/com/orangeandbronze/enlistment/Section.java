@@ -26,7 +26,7 @@ class Section {
         this.sectionId = sectionId;
         this.schedule = schedule;
 
-        room.getHeldSections().forEach(currSection -> currSection.checkForConflict(this));
+        room.checkForConflicts(this);
 
         this.room = room;
         this.subject = subject;

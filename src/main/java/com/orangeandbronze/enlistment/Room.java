@@ -26,6 +26,10 @@ class Room {
         this.heldSections.addAll(heldSections);
     }
 
+    void checkForConflicts(Section section){
+        getHeldSections().forEach(currSection -> currSection.checkForConflict(section));
+    }
+
     Collection<Section> getHeldSections(){
         return new ArrayList<Section>(heldSections);
     }
