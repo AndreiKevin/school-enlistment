@@ -16,6 +16,14 @@ class Schedule {
         this.period = period;
     }
 
+    boolean isConflictingPeriod(Period other) {
+        return this.period.isConflictingPeriod(other);
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
+
     @Override
     public String toString() {
         return days + " " + period;

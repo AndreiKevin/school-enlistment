@@ -64,6 +64,25 @@ public class StudentTest {
     }
 
     @Test
+    void enlist_2_sections_conflicting_schedule() {
+        // Given 1 student and 2 sections w/ 2 periods while one period is within it
+        Student student = (new StudentBuilder())
+                .setStudentNumber(1)
+                .setDegreeProgram(DEFAULT_DEGREE_PROGRAM)
+                .getResult();
+        Room room1 = new Room("AGH20", 45);
+        Room room2 = new Room("HSS30", 45);
+        Section sec1 = new Section("A", new Schedule(Days.TF, new Period(830, 1000)), room1, DEFAULT_SUBJECT_A);
+        Section sec2 = new Section("B", new Schedule(Days.TF, new Period(900, 1100)), room2, DEFAULT_SUBJECT_B);
+
+        // When student enlist in both sections
+        student.enlist(sec1);
+
+        // Then at 2nd section an exception should be thrown
+        assertThrows(ScheduleConflictException.class, () -> student.enlist(sec2));
+    }
+
+    @Test
     void enlist_room_capacity_full(){
         //Given 2 students  and a section that has a room capacity of 1
         Student student1 = (new StudentBuilder())
@@ -181,6 +200,8 @@ public class StudentTest {
         // Then at 2nd section an exception should be thrown
         assertThrows(SameSubjectException.class, () -> student.enlist(sec2));
     }
+
+
 
     @Test
     void enlist_section_with_missing_prerequisite(){

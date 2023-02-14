@@ -15,6 +15,24 @@ public class Period {
         this.start = start;
         this.end = end;
     }
+
+    int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    boolean isConflictingPeriod(Period other) {
+        int otherStart = other.getStart();
+        int otherEnd = other.getEnd();
+        if(otherStart > start && otherStart < end) {
+            return true;
+        }
+        return otherEnd > start && otherEnd < end;
+    }
+
     private void check30MinuteIncrement(int start, int end) {
         int startHundreds = start % 100;
         int endHundreds = end % 100;
@@ -34,6 +52,8 @@ public class Period {
             throw new InvalidPeriodException("End period is at the start or before the start of the period");
         }
     }
+
+
 
     @Override
     public String toString() {

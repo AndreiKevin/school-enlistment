@@ -59,7 +59,7 @@ class Section {
         }
     }
     private boolean hasSameSubject(Section other){return this.subject.equals(other.subject);}
-    private boolean hasSameSchedule(Section other) {return this.schedule.equals(other.schedule);}
+    private boolean hasSameSchedule(Section other) {return this.schedule.isConflictingPeriod(other.schedule.getPeriod());}
 
     int getCurrentStudentOccupied() {
         return currentStudentOccupied;
