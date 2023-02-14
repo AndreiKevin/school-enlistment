@@ -10,6 +10,8 @@ class Student {
     private final Collection<Section> enlistedSections = new HashSet<>();
     private final Collection<Subject> takenSubjects = new HashSet<>();
     private final DegreeProgram degreeProgram;
+    private int numberOfUnits;
+    static final int UNIT_LIMIT = 24;
 
     Student(int studentNumber, DegreeProgram degreeProgram, Collection<Section> enlistedSections, Collection<Subject> takenSubjects) {
         this.studentNumber = studentNumber;
@@ -19,17 +21,30 @@ class Student {
         this.enlistedSections.forEach(currSection -> currSection.addStudent());
 
         this.takenSubjects.addAll(takenSubjects);
+        this.numberOfUnits = 0;
     }
 
     void enlist(Section newSection) {
+        int newNumberOfUnits = computeNewNumberOfUnits(newSection);
+
         notNull(newSection);
         enlistedSections.forEach(currSection -> currSection.checkForConflict(newSection));
 
         Subject subject = newSection.getSubject();
         this.checkIfCanTakeSubject(subject);
 
+        checkIfOverloadedUnits(newNumberOfUnits);
+
         enlistedSections.add(newSection);
         newSection.addStudent();
+
+        this.numberOfUnits = newNumberOfUnits;
+    }
+
+    private void checkIfOverloadedUnits(int newNumberOfUnits){
+        if(newNumberOfUnits > UNIT_LIMIT){
+            throw new OverloadedUnitsException("Student has enlisted beyond the max capacity.");
+        }
     }
 
     private void checkIfCanTakeSubject(Subject subject){
@@ -45,6 +60,8 @@ class Student {
         degreeProgram.checkIfHasSubject(subject);
     }
 
+    private int computeNewNumberOfUnits(Section newSection){ return this.numberOfUnits + newSection.getSubjectUnits(); }
+
     void cancel(Section section){
         notNull(section);
         if(!enlistedSections.contains(section)) {
@@ -53,6 +70,7 @@ class Student {
         }
 
         enlistedSections.remove(section);
+        this.numberOfUnits -= section.getSubjectUnits();
         section.removeStudent();
     }
 

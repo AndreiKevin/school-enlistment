@@ -39,6 +39,9 @@ class Subject {
         return takenSubjects.containsAll(prerequisites);
     }
 
+    int getNumberOfUnits() {
+        return units;
+    }
     BigDecimal getFees(){
         return SUBJECT_FEE_PER_UNIT.multiply(BigDecimal.valueOf(this.units));
     }

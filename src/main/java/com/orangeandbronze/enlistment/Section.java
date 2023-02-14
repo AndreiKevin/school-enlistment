@@ -28,6 +28,9 @@ class Section {
         this.subject = subject;
     }
 
+    int getSubjectUnits(){
+        return this.subject.getNumberOfUnits();
+    }
 
     void checkForConflict(Section other) {
         checkSameSchedule(other);

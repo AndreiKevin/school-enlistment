@@ -261,16 +261,19 @@ public class StudentTest {
         assertThrows(NotInDegreeProgramException.class, () -> student.enlist(section));
     }
 
+    @Test
     void student_cannot_enroll_more_than_24_units() {
-        Subject overloadedSubject = new Subject("SUBJECT_E", 25);
+        Subject overloadedSubject = new Subject("SUBJECT1", 25);
         Student student = (new StudentBuilder())
                 .setStudentNumber(1)
                 .setDegreeProgram(new DegreeProgram(Arrays.asList(overloadedSubject)))
                 .getResult();
         Section section = new Section("E", DEFAULT_SCHEDULE, DEFAULT_ROOM, overloadedSubject);
 
-        assertThrows(OverloadedUnitsException.class, () -> student.enlist(section));
-
+        assertAll(
+                () -> assertThrows(OverloadedUnitsException.class, () -> student.enlist(section)),
+                () -> assertEquals(student.getEnlistedSections().size(), 0)
+        );
     }
 
 }
