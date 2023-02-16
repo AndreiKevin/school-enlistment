@@ -19,10 +19,11 @@ public class Period {
     boolean isConflictingPeriod(Period other) {
         int otherStart = other.getStart();
         int otherEnd = other.getEnd();
-        if(otherStart > start && otherStart < end) {
+
+        if(otherStart >= start && otherStart <= end) {
             return true;
         }
-        return otherEnd > start && otherEnd < end;
+        return otherEnd >= start && otherEnd <= end;
     }
 
     private void check30MinuteIncrement(int start, int end) {

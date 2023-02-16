@@ -23,9 +23,8 @@ class Section {
         notNull(room);
         notNull(subject);
 
-        room.checkForConflicts(this);
+        room.tryAddSchedule(schedule);
         this.room = room;
-        this.room.addSection(this);
 
         this.sectionId = sectionId;
         this.schedule = schedule;
