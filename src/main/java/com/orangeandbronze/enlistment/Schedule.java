@@ -22,10 +22,6 @@ class Schedule {
         return false;
     }
 
-    public Period getPeriod() {
-        return period;
-    }
-
     @Override
     public String toString() {
         return days + " " + period;

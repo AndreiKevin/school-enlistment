@@ -27,7 +27,7 @@ class Room {
         heldSchedule.add(schedule);
     }
 
-    void checkForConflicts(Schedule newSchedule){
+    private void checkForConflicts(Schedule newSchedule){
         heldSchedule.forEach(schedule -> {
             if(schedule.isConflicting(newSchedule)){
                 throw new SectionsWithSameRoomAndScheduleException("Sections cannot have the same schedule. " +

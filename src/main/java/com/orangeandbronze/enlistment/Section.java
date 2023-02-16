@@ -24,10 +24,10 @@ class Section {
         notNull(subject);
 
         room.tryAddSchedule(schedule);
-        this.room = room;
 
         this.sectionId = sectionId;
         this.schedule = schedule;
+        this.room = room;
         this.subject = subject;
 
     }
@@ -46,7 +46,7 @@ class Section {
         }
     }
 
-    boolean hasConflictingSchedule(Section other) {
+    private boolean hasConflictingSchedule(Section other) {
         return schedule.isConflicting(other.schedule);
     }
 
