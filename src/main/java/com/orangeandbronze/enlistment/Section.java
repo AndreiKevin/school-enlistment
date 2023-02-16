@@ -34,20 +34,22 @@ class Section {
     }
 
     void checkForConflict(Section other) {
-        checkSameSchedule(other);
+        checkConflictingSchedule(other);
         checkSameSubject(other);
     }
 
 
-    private void checkSameSchedule(Section other){
-        if (hasSameSchedule(other)) {
+    private void checkConflictingSchedule(Section other){
+        if (hasConflictingSchedule(other)) {
             throw new ScheduleConflictException("current section " + this +
                     " has same schedule as new section " + other +
                     " at schedule " + this.schedule);
         }
     }
 
-    boolean hasSameSchedule(Section other) {return this.schedule.isConflictingPeriod(other.schedule.getPeriod());}
+    boolean hasConflictingSchedule(Section other) {
+        return schedule.isConflicting(other.schedule);
+    }
 
     private void checkSameSubject(Section other){
         if (hasSameSubject(other)) {

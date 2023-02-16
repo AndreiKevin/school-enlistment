@@ -16,8 +16,8 @@ class Schedule {
         this.period = period;
     }
 
-    boolean isConflictingPeriod(Period other) {
-        return this.period.isConflictingPeriod(other);
+    boolean isConflicting(Schedule other) {
+        return this.period.isConflictingPeriod(other.period);
     }
 
     public Period getPeriod() {

@@ -23,7 +23,7 @@ class Room {
 
     void checkForConflicts(Section section){
         heldSections.forEach(currSection -> {
-            if(currSection.hasSameSchedule(section)){
+            if(currSection.hasConflictingSchedule(section)){
                 throw new ScheduleConflictException("Sections cannot share the same room " + currSection + " and " + section);
             }
         });
