@@ -6,7 +6,7 @@ import static org.apache.commons.lang3.Validate.*;
 import java.util.*;
 
 class Room {
-    private Collection<Section> heldSections = new HashSet<>();
+    private final Collection<Section> heldSections = new HashSet<>();
     private final String roomName;
     protected final int capacity;
 
@@ -21,17 +21,12 @@ class Room {
         this.capacity = capacity;
     }
 
-    Room(String roomName, int capacity, Collection<Section> heldSections){
-        this(roomName, capacity);
-        this.heldSections.addAll(heldSections);
-    }
-
     void checkForConflicts(Section section){
-        getHeldSections().forEach(currSection -> currSection.checkForConflict(section));
-    }
-
-    Collection<Section> getHeldSections(){
-        return new ArrayList<Section>(heldSections);
+        heldSections.forEach(currSection -> {
+            if(currSection.hasSameSchedule(section)){
+                throw new ScheduleConflictException("Sections cannot share the same room " + currSection + " and " + section);
+            }
+        });
     }
 
     void addSection(Section newSection){
