@@ -51,6 +51,7 @@ class Student {
         this.checkIfPrerequisitesTaken(subject);
         this.checkIfInDegreeProgram(subject);
     }
+    
     private void checkIfPrerequisitesTaken(Subject subject) {
         if(! subject.isPrerequisitesTaken(takenSubjects))
             throw new MissingPrerequisiteException("Not all prerequisites have been taken");

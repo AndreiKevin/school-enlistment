@@ -33,10 +33,6 @@ class Section {
 
     }
 
-    int getSubjectUnits(){
-        return this.subject.getNumberOfUnits();
-    }
-
     void checkForConflict(Section other) {
         checkSameSchedule(other);
         checkSameSubject(other);
@@ -50,6 +46,9 @@ class Section {
                     " at schedule " + this.schedule);
         }
     }
+
+    boolean hasSameSchedule(Section other) {return this.schedule.isConflictingPeriod(other.schedule.getPeriod());}
+
     private void checkSameSubject(Section other){
         if (hasSameSubject(other)) {
             throw new SameSubjectException("current section " + this +
@@ -57,13 +56,9 @@ class Section {
                     " with subject " + this.subject);
         }
     }
-    boolean hasSameSchedule(Section other) {return this.schedule.isConflictingPeriod(other.schedule.getPeriod());}
 
     private boolean hasSameSubject(Section other){return this.subject.equals(other.subject);}
 
-    int getCurrentStudentOccupied() {
-        return currentStudentOccupied;
-    }
 
     void addStudent(){
         checkIsFull();
@@ -94,6 +89,13 @@ class Section {
 
     Subject getSubject(){
         return subject;
+    }
+
+    int getCurrentStudentOccupied() {
+        return currentStudentOccupied;
+    }
+    int getSubjectUnits(){
+        return this.subject.getNumberOfUnits();
     }
 
     @Override

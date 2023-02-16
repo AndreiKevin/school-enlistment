@@ -16,14 +16,6 @@ public class Period {
         this.end = end;
     }
 
-    int getStart() {
-        return start;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
     boolean isConflictingPeriod(Period other) {
         int otherStart = other.getStart();
         int otherEnd = other.getEnd();
@@ -53,6 +45,14 @@ public class Period {
         }
     }
 
+
+    int getStart() {
+        return start;
+    }
+
+    int getEnd() {
+        return end;
+    }
 
 
     @Override
