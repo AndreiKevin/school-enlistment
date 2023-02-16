@@ -23,14 +23,13 @@ class Section {
         notNull(room);
         notNull(subject);
 
+        room.checkForConflicts(this);
+        this.room = room;
+        this.room.addSection(this);
+
         this.sectionId = sectionId;
         this.schedule = schedule;
-
-        room.checkForConflicts(this);
-
-        this.room = room;
         this.subject = subject;
-        this.room.addSection(this);
 
     }
 
@@ -58,8 +57,9 @@ class Section {
                     " with subject " + this.subject);
         }
     }
+    boolean hasSameSchedule(Section other) {return this.schedule.isConflictingPeriod(other.schedule.getPeriod());}
+
     private boolean hasSameSubject(Section other){return this.subject.equals(other.subject);}
-    private boolean hasSameSchedule(Section other) {return this.schedule.isConflictingPeriod(other.schedule.getPeriod());}
 
     int getCurrentStudentOccupied() {
         return currentStudentOccupied;

@@ -48,5 +48,3 @@ enum Days {
     MTH, TF, WS
 }
 
-// 830 - 1730
-
