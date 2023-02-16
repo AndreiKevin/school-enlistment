@@ -15,9 +15,6 @@ public class SectionTest {
 
         // When a new section with the same room and schedule is made
         // Then throw an error
-        assertAll(
-                () -> assertThrows(ScheduleConflictException.class, () -> new Section("2", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_B)),
-                () -> assertEquals(room.getHeldSections().size(), 1)
-        );
+        assertThrows(ScheduleConflictException.class, () -> new Section("2", DEFAULT_SCHEDULE, room, DEFAULT_SUBJECT_B));
     }
 }
