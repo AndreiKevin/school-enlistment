@@ -17,8 +17,8 @@ public class Period {
     }
 
     boolean isConflictingPeriod(Period other) {
-        int otherStart = other.getStart();
-        int otherEnd = other.getEnd();
+        int otherStart = other.start;
+        int otherEnd = other.end;
 
         if(otherStart >= start && otherStart <= end) {
             return true;
@@ -45,16 +45,6 @@ public class Period {
             throw new InvalidPeriodException("End period is at the start or before the start of the period");
         }
     }
-
-
-    int getStart() {
-        return start;
-    }
-
-    int getEnd() {
-        return end;
-    }
-
 
     @Override
     public String toString() {
