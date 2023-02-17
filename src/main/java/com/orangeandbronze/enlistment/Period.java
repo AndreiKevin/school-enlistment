@@ -11,7 +11,7 @@ public class Period {
         check30MinuteIncrement(start, end);
         checkValidDuration(start, end);
         checkEndBeforeStart(start, end);
-        // 830 - 1730
+
         this.start = start;
         this.end = end;
     }
