@@ -6,7 +6,7 @@ import static org.apache.commons.lang3.Validate.*;
 class DegreeProgram {
 
     private final Collection<Subject> subjects = new HashSet<>();
-    public DegreeProgram(Collection<Subject> subjects){
+    DegreeProgram(Collection<Subject> subjects){
         if (subjects == null) {
             throw new NullPointerException("subjects should not be null");
         }
@@ -14,7 +14,7 @@ class DegreeProgram {
         this.subjects.addAll(subjects);
     }
 
-    public DegreeProgram(){
+    DegreeProgram(){
 
     }
 
